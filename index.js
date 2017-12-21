@@ -10,6 +10,7 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
+// Middleware
 // Enable and connect passort to use cookies
 app.use(
   cookieSession({

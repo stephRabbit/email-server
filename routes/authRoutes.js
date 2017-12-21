@@ -8,7 +8,15 @@ module.exports = app => {
   );
 
   // Turn url code into profile
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  // After user comes back auth flow passport.authenicate() middleware
+  // pass to handler and redirects to appropriate location
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys')
+    }
+  );
 
   // Logout attached by passport kills id in cookie
   app.get('/api/logout', (req, res) => {

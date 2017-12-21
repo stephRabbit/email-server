@@ -21,19 +21,15 @@ passport.use(new GoogleStrategy({
     callbackURL: '/auth/google/callback',
     proxy: true
   },
-  (accessToken, refreshToken, profile, done) => {
+  async (accessToken, refreshToken, profile, done) => {
     // Model instance to create decrete user record
-    User.findOne({ googleId: profile.id }).then(existingUser => {
-      if (existingUser) {
-        // Already exists - null for err object and existingUser
-        done(null, existingUser);
-      }
-      else {
-        // Create new user with this ID
-        new User({ googleId: profile.id })
-          .save()
-          .then(user => done(null, user));
-      }
-    });
+    const existingUser = await User.findOne({ googleId: profile.id });
+
+    // Already exists - null for err object and existingUser
+    if (existingUser) return done(null, existingUser);
+
+    // Create new user with this ID
+    const user = await new User({ googleId: profile.id }).save();
+    done(null, user);
   }
 ));
