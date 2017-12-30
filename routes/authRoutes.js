@@ -21,7 +21,7 @@ module.exports = app => {
   // Logout attached by passport kills id in cookie
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
 
   // Get request to app

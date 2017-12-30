@@ -1,4 +1,4 @@
-import { FETCH_USER } from '../actions/types';
+import { FETCH_USER, LOGOUT_USER } from '../actions/types';
 
 // FETCH_USER
 // null => await user status
@@ -11,6 +11,9 @@ export default (state = null, action) => {
     case FETCH_USER:
       console.log(action.payload);
       return action.payload || false;
+    case LOGOUT_USER:
+      console.log(action);
+      return action.payload;
     default:
       return state;
   }
