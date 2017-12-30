@@ -31,7 +31,7 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
-// handle routes defined by front end
+// handle routes defined by Front End
 if (process.env.NODE_ENV === 'production') {
   // serve production assets main.js or main.css
   app.use(express.static('client/build'));
