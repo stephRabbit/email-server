@@ -8,11 +8,12 @@ require('./models/User');
 require('./models/Survey');
 require('./services/passort');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-// Middleware
+// Middlewares
 
 // Parse body of requests (post, put, or patch) and assign
 // it to the req.body of the incoming request object
